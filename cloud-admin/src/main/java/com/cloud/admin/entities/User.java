@@ -15,10 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 
-    private Integer id;
+    private Integer user_id;
     private String username;
     private String password;
     private String phone;
     private Integer available;
+    private String chinaname;
+    private String mail;
 
 }

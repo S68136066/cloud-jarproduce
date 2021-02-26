@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.admin.dao.UserDao">
     <resultMap id="UserResultMap" type="com.cloud.admin.entities.User">
-        <id column="id" property="id"></id>
+        <id column="user_id" property="user_id"></id>
         <id column="username" property="username"></id>
         <id column="password" property="password"></id>
         <id column="phone" property="phone"></id>
         <id column="available" property="available"></id>
+        <id column="chinaname" property="chinaname"></id>
+        <id column="mail" property="mail"></id>
     </resultMap>
     <select id="selectUser" parameterType="String" resultMap="UserResultMap">
-        select id,username,password,phone,available from user where username = #{username}
+        select user_id,username,password,phone,available,chinaname,mail from user where username = #{username}
     </select>
 </mapper>

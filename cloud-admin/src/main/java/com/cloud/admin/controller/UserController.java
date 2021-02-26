@@ -3,6 +3,7 @@ package com.cloud.admin.controller;
 import com.cloud.admin.service.UserService;
 import com.cloud.admin.entities.User;
 import com.cloud.admin.util.CommonResult;
+import com.cloud.admin.util.CrossOriginUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,9 +12,12 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author：
@@ -36,9 +40,10 @@ public class UserController {
      * @param password
      * @return
      */
-    @PostMapping(value = "/login/{username}/{password}")
-    public CommonResult login(@PathVariable("username")String username,@PathVariable("password")String password){
-         log.info("********用户登录********");
+    @PostMapping(value = "/login")
+    public CommonResult login(@RequestParam(value = "username", required = false)String username,@RequestParam(value = "password", required = false)String password, HttpServletRequest request, HttpServletResponse response){
+        //CrossOriginUtil.setNewCrossOrigin(request, response);
+        log.info("********用户登录********");
          UsernamePasswordToken token = new UsernamePasswordToken(username,password);
          Subject currentUser = SecurityUtils.getSubject();
          try{
@@ -52,8 +57,9 @@ public class UserController {
              return new CommonResult(302,"账户被禁用",null);
          }
          if(currentUser.isAuthenticated()){
+             User user = userService.selectUser(username);
              log.info("用户："+token.getUsername()+"认证成功！");
-             return new CommonResult(200,"用户认证成功,serverPort: "+serverPort,username);
+             return new CommonResult(200,"用户认证成功,serverPort: "+serverPort,user);
          }else {
              token.clear();
              return new CommonResult(303,"用户认证失败",username);

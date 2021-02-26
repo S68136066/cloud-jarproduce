@@ -10,6 +10,8 @@
   <modules>
     <module>cloud-admin</module>
     <module>cloud-EurakeServer</module>
+    <module>cloud-jarproduce-gateway</module>
+    <module>cloud-jarproduce-common</module>
   </modules>
   <packaging>pom</packaging>
   <!--统一管理jar包和版本-->
@@ -23,6 +25,7 @@
     <mysql.version>8.0.15</mysql.version>
     <druid.verison>1.1.16</druid.verison>
     <mybatis.spring.boot.verison>1.3.0</mybatis.spring.boot.verison>
+    <hutool-all.version>5.1.0</hutool-all.version>
   </properties>
   <!--子模块继承之后，提供作用：锁定版本+子module不用谢groupId和version-->
   <dependencyManagement>

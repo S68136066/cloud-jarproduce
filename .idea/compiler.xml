@@ -9,6 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-admin" />
         <module name="cloud-EurakeServer" />
+        <module name="cloud-jarproduce-common" />
+        <module name="cloud-jarproduce-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
