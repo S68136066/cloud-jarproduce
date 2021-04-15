@@ -19,6 +19,7 @@ public interface UserService {
     /**
      * 用户注册
      * @param user
+     * @param role_id
      * @return
      */
     Boolean userRegister(@Param("user") User user,@Param("role_id")Integer role_id);
