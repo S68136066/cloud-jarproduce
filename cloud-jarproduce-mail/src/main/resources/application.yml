@@ -1,17 +1,18 @@
 server:
-  port: 7001
+  port: 8010
 
 spring:
   application:
     name: cloud-admin-service
   datasource:
-  # 当前数据源操作类型
+    # 当前数据源操作类型
     type: com.alibaba.druid.pool.DruidDataSource
     # mysql驱动类
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cloudjar?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
+
 
 eureka:
   client:
@@ -25,6 +26,4 @@ eureka:
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   configLocation: classpath:mybatis.xml
-  type-aliases-package: com.cloud.admin.entities
-
-
+  type-aliases-package: com.cloud.common.entities

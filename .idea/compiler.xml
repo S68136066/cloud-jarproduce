@@ -11,6 +11,7 @@
         <module name="cloud-EurakeServer" />
         <module name="cloud-jarproduce-common" />
         <module name="cloud-jarproduce-gateway" />
+        <module name="cloud-jarproduce-mail" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
