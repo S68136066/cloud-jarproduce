@@ -7,10 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cloud-admin" />
-        <module name="cloud-EurakeServer" />
         <module name="cloud-jarproduce-common" />
+        <module name="cloud-EurakeServer" />
         <module name="cloud-jarproduce-gateway" />
+        <module name="cloud-admin" />
         <module name="cloud-jarproduce-mail" />
       </profile>
     </annotationProcessing>

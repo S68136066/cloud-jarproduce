@@ -1,11 +1,13 @@
 package com.cloud.mail.MailThreadPool;
 
 import com.cloud.common.utils.CommonResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.concurrent.Callable;
 
@@ -17,14 +19,26 @@ import java.util.concurrent.Callable;
  **/
 @Component
 public class MailCommThread implements Callable {
-    @Resource
+    @Autowired
     private JavaMailSender mailSender;
-
+//    @Resource
+//    public static MailCommThread mailCommThread;
+//    /**
+//     * 初始化userService接口中的方法 在非Controller中使用
+//     */
+//    @PostConstruct
+//    public void initOvid(){
+//        mailCommThread = this;
+//        mailCommThread.mailSender = this.mailSender;
+//    }
     private String name;
 
     private String username;
 
     private String mailaddrss;
+
+    public MailCommThread() {
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -51,6 +65,7 @@ public class MailCommThread implements Callable {
         int num = (int) ((Math.random() * 9 + 1) * 100000);
         message.setText("你好，您的验证码是 " + num + " 请尽快使用，有效期只有三分钟");
         // 抄送人
+        mailSender.send(message);
         return new CommonResult(200,"邮件发送成功！",null);
     }
 }
