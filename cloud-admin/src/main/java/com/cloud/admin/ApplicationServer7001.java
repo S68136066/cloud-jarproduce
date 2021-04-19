@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
@@ -19,6 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = "com.cloud.admin.outservice")
 public class ApplicationServer7001 {
      public static void main(String[] args){
          SpringApplication.run(ApplicationServer7001.class,args);

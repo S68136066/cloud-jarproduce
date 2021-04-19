@@ -1,5 +1,6 @@
 package com.cloud.admin.controller;
 
+import com.cloud.admin.outservice.outmailService;
 import com.cloud.admin.service.UserService;
 import com.cloud.admin.entities.User;
 import com.cloud.admin.util.CommonResult;
@@ -33,6 +34,9 @@ public class UserController {
     private UserService userService;
     @Value("${server.port}")
     private String serverPort;
+
+    @Resource
+    private outmailService outmailService;
     /**
      * 用户登录功能
      * 结合Shiro权限
@@ -74,6 +78,7 @@ public class UserController {
     public CommonResult getUserByUserName(@PathVariable("username")String username){
         log.info("**********用户查询**********");
         User user = userService.selectUser(username);
+        //outmailService.sendEmail(user.getMail());
         if(user != null){
             return new CommonResult(200,"查询成功,serverPort: "+serverPort,user);
         }else {

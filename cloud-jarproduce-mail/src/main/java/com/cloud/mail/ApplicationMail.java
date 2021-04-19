@@ -18,7 +18,6 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
  **/
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.cloud.mail.MailThreadPool"})
 @Slf4j
 public class ApplicationMail {
 

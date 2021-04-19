@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.concurrent.Callable;
 
 /**
@@ -19,18 +17,22 @@ import java.util.concurrent.Callable;
  **/
 @Component
 public class MailCommThread implements Callable {
+
     @Autowired
-    private JavaMailSender mailSender;
-//    @Resource
-//    public static MailCommThread mailCommThread;
-//    /**
-//     * 初始化userService接口中的方法 在非Controller中使用
-//     */
-//    @PostConstruct
-//    public void initOvid(){
-//        mailCommThread = this;
-//        mailCommThread.mailSender = this.mailSender;
-//    }
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    public static MailCommThread mailCommThread;
+
+    /**
+     * 初始化
+     */
+    @PostConstruct
+    public void initOvid(){
+        mailCommThread = this;
+        mailCommThread.javaMailSender = this.javaMailSender;
+    }
+
     private String name;
 
     private String username;
@@ -53,7 +55,7 @@ public class MailCommThread implements Callable {
     }
 
     @Override
-    public Object call() throws Exception {
+    public synchronized Object call() throws Exception {
         SimpleMailMessage message = new SimpleMailMessage();
         // 发件人
         message.setFrom("xing18332916523@163.com");
@@ -65,7 +67,7 @@ public class MailCommThread implements Callable {
         int num = (int) ((Math.random() * 9 + 1) * 100000);
         message.setText("你好，您的验证码是 " + num + " 请尽快使用，有效期只有三分钟");
         // 抄送人
-        mailSender.send(message);
+        mailCommThread.javaMailSender.send(message);
         return new CommonResult(200,"邮件发送成功！",null);
     }
 }

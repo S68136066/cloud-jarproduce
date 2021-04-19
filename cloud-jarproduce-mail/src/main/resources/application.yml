@@ -12,19 +12,23 @@ spring:
     url: jdbc:mysql://localhost:3306/cloudjar?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
-    mail:
-      host: smtp.qq.com
-      username: xing18332916523@163.com
-      password: xloveq11
-      properties:
-        mail:
-          smtp:
-            auth: true
-            starttls:
-              enable: true
-              required: true
-
-
+  mail:
+    default-encoding: utf-8
+    host: smtp.163.com
+    password: HKTYEJZPOGHVXOWC
+    username: xing18332916523@163.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            fallback: false
+            port: 465
+          ssl:
+            enabled: true
+          starttls:
+            enabled: true
+            required: true
 
 
 eureka:

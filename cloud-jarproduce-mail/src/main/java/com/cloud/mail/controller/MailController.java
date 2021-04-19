@@ -27,7 +27,7 @@ public class MailController {
 
     @PostMapping("/sendemail")
     public CommonResult sendMail(@RequestParam(value = "mailaddrss", required = false)String mailaddrss) throws ExecutionException, InterruptedException {
-        if(null!=mailaddrss && !" ".equals(mailaddrss)){
+        if(null!=mailaddrss && !"".equals(mailaddrss)){
            return ms.sendEmail(mailaddrss);
         }else {
             return new CommonResult(201,"邮件地址不能为空！",null);
