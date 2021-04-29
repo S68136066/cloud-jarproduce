@@ -25,6 +25,13 @@ public class MailController {
     @Resource
     private MailService ms;
 
+    /**
+     * 邮件发送接口
+     * @param mailaddrss
+     * @return
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @PostMapping("/sendemail")
     public CommonResult sendMail(@RequestParam(value = "mailaddrss", required = false)String mailaddrss) throws ExecutionException, InterruptedException {
         if(null!=mailaddrss && !"".equals(mailaddrss)){

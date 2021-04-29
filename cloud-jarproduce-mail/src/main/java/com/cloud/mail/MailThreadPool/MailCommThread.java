@@ -54,6 +54,11 @@ public class MailCommThread implements Callable {
         this.mailaddrss = mailaddrss;
     }
 
+    /**
+     * 邮件发送线程
+     * @return
+     * @throws Exception
+     */
     @Override
     public synchronized Object call() throws Exception {
         SimpleMailMessage message = new SimpleMailMessage();

@@ -24,7 +24,7 @@ public interface UserDao {
      * @param user
      * @return
      */
-    int userRegister(@Param("user") User user);
+    int userRegister(User user);
 
     /**
      * 用户-角色关联

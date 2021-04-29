@@ -11,11 +11,17 @@
         <id column="mail" property="mail"></id>
     </resultMap>
     <select id="selectUser" parameterType="String" resultMap="UserResultMap">
-        select user_id,username,password,phone,available,chinaname,mail from user where username = #{username}
+        select user_id,username,password,phone,available,chinaname,mail
+        from user where username = #{username}
     </select>
 
-    <insert id="userRegister" parameterType="user"  useGeneratedKeys="true" keyProperty="user_id">
-        insert into user(username,password,phone,available,chinaname,mail,sex) values (#{username},#{password},#{phone},#{available},#{chinaname},#{mail},#{sex})
+    <insert id="userRegister" parameterType="com.cloud.admin.entities.User"  useGeneratedKeys="true" keyProperty="user_id">
+        insert into user(username,password,phone,available,chinaname,mail,sex)
+        values (#{username},#{password},#{phone},#{available},#{chinaname},#{mail},#{sex})
     </insert>
-    
+
+    <insert id="RoleOrUser" parameterType="Integer" >
+        insert into role_user(role_id,user_id)
+        values (#{role_id},#{user_id})
+    </insert>
 </mapper>

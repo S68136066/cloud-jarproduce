@@ -15,22 +15,11 @@ import org.springframework.web.util.pattern.PathPatternParser;
  **/
 @Configuration
 public class CorsConfig {
-
-//    @Bean
-//    public CorsWebFilter corsFilter() {
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.addAllowedMethod("*");
-//        config.addAllowedOrigin("*");
-//        config.addAllowedHeader("*");
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-//        source.registerCorsConfiguration("/**", config);
-//
-//        return new CorsWebFilter(source);
-//    }
-    @Bean
+    /**
+     * 解决前后端跨域问题
+     * @return
+     */
     public CorsWebFilter corsFilter() {
-        //LOGGER.info("开启CorsFilter，解决前后端分离模式接口交互跨域问题");
         System.out.println("开启CorsFilter，解决前后端分离模式接口交互跨域问题");
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration corsConfiguration = new CorsConfiguration();

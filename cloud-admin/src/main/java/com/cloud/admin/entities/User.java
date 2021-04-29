@@ -22,6 +22,7 @@ public class User {
     private Integer available;
     private String chinaname;
     private String mail;
+    private Integer sex;
 
 
 }

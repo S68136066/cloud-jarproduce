@@ -2,6 +2,7 @@ package com.cloud.admin.service;
 
 import com.cloud.admin.entities.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author：lixx
@@ -22,6 +23,7 @@ public interface UserService {
      * @param role_id
      * @return
      */
+    @Transactional
     Boolean userRegister(@Param("user") User user,@Param("role_id")Integer role_id);
 
 //    /**

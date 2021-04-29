@@ -46,28 +46,32 @@ public class UserController {
      */
     @PostMapping(value = "/login")
     public CommonResult login(@RequestParam(value = "username", required = false)String username,@RequestParam(value = "password", required = false)String password, HttpServletRequest request, HttpServletResponse response){
-        //CrossOriginUtil.setNewCrossOrigin(request, response);
         log.info("********用户登录********");
-         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
-         Subject currentUser = SecurityUtils.getSubject();
-         try{
-             //主体提交登录请求到SecurityManger管理器
-             currentUser.login(token);
-         }catch (IncorrectCredentialsException ice){
-             return new CommonResult(300,"密码不正确",null);
-         }catch(UnknownAccountException uae){
-             return new CommonResult(301,"账号不存在",null);
-         }catch(AuthenticationException ae){
-             return new CommonResult(302,"账户被禁用",null);
-         }
-         if(currentUser.isAuthenticated()){
-             User user = userService.selectUser(username);
-             log.info("用户："+token.getUsername()+"认证成功！");
-             return new CommonResult(200,"用户认证成功,serverPort: "+serverPort,user);
-         }else {
-             token.clear();
-             return new CommonResult(303,"用户认证失败",username);
-         }
+        if("".equals(username)||null == username||"".equals(username)||null == username){
+            return new CommonResult(400,"用户名和密码不能为空！");
+        }else{
+            UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+            Subject currentUser = SecurityUtils.getSubject();
+            try{
+                //主体提交登录请求到SecurityManger管理器
+                currentUser.login(token);
+            }catch (IncorrectCredentialsException ice){
+                return new CommonResult(300,"密码不正确",null);
+            }catch(UnknownAccountException uae){
+                return new CommonResult(301,"账号不存在",null);
+            }catch(AuthenticationException ae){
+                return new CommonResult(302,"账户被禁用",null);
+            }
+            if(currentUser.isAuthenticated()){
+                User user = userService.selectUser(username);
+                log.info("用户："+token.getUsername()+"认证成功！");
+                return new CommonResult(200,"用户认证成功,serverPort: "+serverPort,user);
+            }else {
+                token.clear();
+                return new CommonResult(303,"用户认证失败",username);
+            }
+        }
+
     }
     /**
      * 用户查询
@@ -77,13 +81,36 @@ public class UserController {
     @GetMapping(value = "/selectUser/{username}")
     public CommonResult getUserByUserName(@PathVariable("username")String username){
         log.info("**********用户查询**********");
-        User user = userService.selectUser(username);
-        //outmailService.sendEmail(user.getMail());
-        if(user != null){
-            return new CommonResult(200,"查询成功,serverPort: "+serverPort,user);
+        if("".equals(username)|| username == null){
+            return new CommonResult(400,"查询用户名不能为空！");
         }else {
-            return new CommonResult(400,"查询失败",null);
+            User user = userService.selectUser(username);
+            if(user != null){
+                return new CommonResult(200,"查询成功,serverPort: "+serverPort,user);
+            }else {
+                return new CommonResult(400,"查询失败",null);
+            }
         }
 
+    }
+
+    /**
+     * 用户注册功能
+     * @param user
+     * @return
+     */
+    @PostMapping(value = "/userRegister")
+    public CommonResult userRegister(@RequestBody User user,@RequestParam("role_id")Integer role_id){
+     if(user != null && !"".equals(user)){
+          Boolean istrue = userService.userRegister(user,role_id);
+          if(istrue){
+              return new CommonResult(200,"用户注册成功！",user);
+          }else {
+              return new CommonResult(400,"用户注册失败！",user);
+          }
+     }else {
+         log.info("用户输入值为空！");
+         return new CommonResult(400,"用户注册信息不能为空！",null);
+     }
     }
 }
