@@ -1,5 +1,8 @@
 package com.cloud.common.ThreadFactory;
 
+import com.cloud.common.autoexception.CustomException;
+import com.cloud.common.utils.TimerUtil;
+
 /**
  * @author：xing1
  * @Date：2021/3/3
@@ -15,8 +18,10 @@ public class TestThread  {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    TimerUtil time = new TimerUtil();
                     for(int i = 0;i<100;i++){
-                        System.out.println("线程---->"+i);
+                            System.out.println("线程---->"+i);
+
                     }
                 }
             });

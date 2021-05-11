@@ -19,6 +19,7 @@ public class CorsConfig {
      * 解决前后端跨域问题
      * @return
      */
+    @SuppressWarnings("all")
     public CorsWebFilter corsFilter() {
         System.out.println("开启CorsFilter，解决前后端分离模式接口交互跨域问题");
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
